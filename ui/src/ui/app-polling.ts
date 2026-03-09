@@ -52,12 +52,15 @@ export function startDebugPolling(host: PollingHost) {
   if (host.debugPollInterval != null) {
     return;
   }
-  host.debugPollInterval = window.setInterval(() => {
-    if (host.tab !== "debug") {
-      return;
-    }
-    void loadDebug(host as unknown as OpenClawApp);
-  }, 3000);
+  host.debugPollInterval = window.setInterval(
+    () => {
+      if (host.tab !== "debug") {
+        return;
+      }
+      void loadDebug(host as unknown as OpenClawApp);
+    },
+    30 * 60 * 1000,
+  );
 }
 
 export function stopDebugPolling(host: PollingHost) {
